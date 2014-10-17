@@ -14,7 +14,11 @@ public class MainActivity extends Activity implements
 	private FriendsFragment mFriendsFragment;
 	private FeedFragment mFeedFragment;
 
-	@Override
+    private static final String FEED_KEY = "feed";
+    private int mLastSelectedPosition = 0;
+
+
+    @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_activity);
@@ -39,6 +43,15 @@ public class MainActivity extends Activity implements
 						.findFragmentById(R.id.feed_frag);
 			}
 		}
+        else {
+            // Restore last selected feed from saved instance
+            Log.i(TAG, "Start restoring previous selected Feed");
+            mLastSelectedPosition = savedInstanceState.getInt(FEED_KEY);
+            Log.i(TAG, "Previous selected Feed index was " + mLastSelectedPosition);
+            mFeedFragment = (FeedFragment) getFragmentManager().findFragmentById(R.id.feed_frag);
+            if (mLastSelectedPosition != 0)
+                mFeedFragment.updateFeedDisplay(mLastSelectedPosition);
+        }
 
 	}
 
@@ -77,7 +90,21 @@ public class MainActivity extends Activity implements
 
 		// Update Twitter feed display on FriendFragment
 		mFeedFragment.updateFeedDisplay(position);
+        mLastSelectedPosition = position;
 
 	}
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+
+        Log.i(TAG, "Entered onSaveInstanceState");
+
+        // save the current foreground feed
+        savedInstanceState.putInt(FEED_KEY, mLastSelectedPosition);
+        Log.i(TAG, "Saved feed index = " + mLastSelectedPosition);
+        // as recommended by android basics training, always call the superclass so it can save the view hierarchy state
+        super.onSaveInstanceState(savedInstanceState);
+
+    }
 
 }
