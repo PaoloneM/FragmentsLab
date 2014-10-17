@@ -24,7 +24,7 @@ public class FriendsFragment extends ListFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		Log.i(TAG, "Entered FriendsFragment onCreate()");
 		// use different layout definition, depending on whether device is pre-
 		// or post-honeycomb
 
@@ -39,6 +39,7 @@ public class FriendsFragment extends ListFragment {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
+		Log.i(TAG, "Entered FriendsFragment onAttach()");
 
 		// Make sure that the hosting Activity has implemented
 		// the SelectionListener callback interface. We need this
@@ -66,7 +67,7 @@ public class FriendsFragment extends ListFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
-		Log.i(TAG, "Entered onActivityCreated()");
+		Log.i(TAG, "Entered FriendsFragment onActivityCreated()");
 
 		// When using two-pane layout, configure the ListView to highlight the
 		// selected list item
@@ -81,6 +82,8 @@ public class FriendsFragment extends ListFragment {
 
 	@Override
 	public void onListItemClick(ListView l, View view, int position, long id) {
+
+		Log.i(TAG, "Entered FriendsFragment onListItemClick()");
 
 		// Notify the hosting Activity that a selection has been made.
 

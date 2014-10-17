@@ -22,7 +22,8 @@ public class MainActivity extends Activity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_activity);
-
+		Log.i(TAG, "Entered MainActivity onCreate()");
+		
 		if (savedInstanceState == null) {
 			// If the layout is single-pane, create the FriendsFragment 
 			// and add it to the Activity
@@ -48,9 +49,10 @@ public class MainActivity extends Activity implements
             Log.i(TAG, "Start restoring previous selected Feed");
             mLastSelectedPosition = savedInstanceState.getInt(FEED_KEY);
             Log.i(TAG, "Previous selected Feed index was " + mLastSelectedPosition);
-            mFeedFragment = (FeedFragment) getFragmentManager().findFragmentById(R.id.feed_frag);
+/*            FragmentManager fragmentManager = getFragmentManager();
+            mFeedFragment = (FeedFragment) fragmentManager.findFragmentById(R.id.feed_frag);
             if (mLastSelectedPosition != 0)
-                mFeedFragment.updateFeedDisplay(mLastSelectedPosition);
+                mFeedFragment.updateFeedDisplay(mLastSelectedPosition); */
         }
 
 	}
