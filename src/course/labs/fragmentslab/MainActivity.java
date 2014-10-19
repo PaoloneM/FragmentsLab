@@ -24,17 +24,19 @@ public class MainActivity extends Activity implements
 		setContentView(R.layout.main_activity);
 		Log.i(TAG, "Entered MainActivity onCreate()");
 		
-		if (savedInstanceState == null) {
 			// If the layout is single-pane, create the FriendsFragment 
 			// and add it to the Activity
 	
 			if (!isInTwoPaneMode()) {
 				
-				mFriendsFragment = new FriendsFragment();
-	
-				//TODO 1 - add the FriendsFragment to the fragment_container
-				getFragmentManager().beginTransaction().add(R.id.fragment_container, mFriendsFragment).commit();
+				if (savedInstanceState == null) {
 				
+					mFriendsFragment = new FriendsFragment();
+		
+					//TODO 1 - add the FriendsFragment to the fragment_container
+					getFragmentManager().beginTransaction().add(R.id.fragment_container, mFriendsFragment).commit();
+				
+				}
 	
 			} else {
 	
@@ -44,19 +46,8 @@ public class MainActivity extends Activity implements
 						.findFragmentById(R.id.feed_frag);
 			}
 		}
-        else {
-            // Restore last selected feed from saved instance
-            Log.i(TAG, "Start restoring previous selected Feed");
-            mLastSelectedPosition = savedInstanceState.getInt(FEED_KEY);
-            Log.i(TAG, "Previous selected Feed index was " + mLastSelectedPosition);
-/*            FragmentManager fragmentManager = getFragmentManager();
-            mFeedFragment = (FeedFragment) fragmentManager.findFragmentById(R.id.feed_frag);
-            if (mLastSelectedPosition != 0)
-                mFeedFragment.updateFeedDisplay(mLastSelectedPosition); */
-        }
-
-	}
-
+ 
+	
 	// If there is no fragment_container ID, then the application is in
 	// two-pane mode
 
